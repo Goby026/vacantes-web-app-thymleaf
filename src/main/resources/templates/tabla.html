@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--    <link rel="stylesheet" href="styles.css" />-->
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+    <title>Listado de vacantes</title>
+</head>
+<body>
+
+    <header class="header shadow">
+        <h1>Lista de vacantes</h1>
+        <img th:src="@{/images/day1-ipod.png}" alt="day1-ipod.png">
+    </header>
+    <nav class="navbar mt-5">
+        <a th:href="@{/categorias/create}" class="btn btn-primary">Nueva categoría</a>
+    </nav>
+    <div class="container">
+        <table>
+            <thead>
+                <tr class="tbl-head">
+                    <th>ID</th>
+                    <th>Logo</th>
+                    <th>Puesto</th>
+                    <th>Descripcion</th>
+                    <th>Fecha</th>
+                    <th>Salario</th>
+                    <th>Destacad@</th>
+                    <th colspan="2">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="vacante: ${vacantes}">
+                    <td th:text=${vacante.id}></td>
+                    <td>
+                        <img th:src="@{/images/{img} (img=${vacante.logo})}" alt="" style="width: 60px">
+                    </td>
+                    <td th:text=${vacante.nombre}></td>
+                    <td th:text=${vacante.descripcion}></td>
+                    <td th:text=${vacante.fecha}></td>
+                    <td th:text=${vacante.salario}></td>
+<!--                    <td th:text="${vacante.destacado} == 1 ? 'SI' : 'NO'"></td>-->
+                    <td>
+                        <span th:if="${ vacante.destacado==1 }">SI</span>
+                        <span th:unless="${ vacante.destacado==1 }">NO</span>
+                    </td>
+                    <td>
+                        <a th:href="@{/vacantes/view/{id} ( id=${vacante.id} ) }" class="btn btn-primary btn-block">
+                            Detalle
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="@{/vacantes/delete( id=${vacante.id} ) }" class="btn btn-danger">
+                            Eliminar
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

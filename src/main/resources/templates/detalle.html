@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css" />
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+    <title>Detalle de vacante</title>
+</head>
+<body>
+    <header class="header shadow">
+        <h1>Detalle de la Vacante</h1>
+    </header>
+    <div class="container">
+
+        <div class="card" style="margin-top:1rem">
+            <h3 for="">Puesto</h3>
+            <span th:text=${vacante.nombre}></span> <br>
+            <h3 for="">Descripción</h3>
+            <span th:text=${vacante.descripcion}></span> <br>
+            <h3 for="">Fecha</h3>
+            <span th:text=${vacante.fecha}></span> <br>
+            <h3 for="">Salario</h3>
+            <span th:text="'S/ ' + ${vacante.salario}"></span> <br>
+        </div>
+    </div>
+</body>
+</html>

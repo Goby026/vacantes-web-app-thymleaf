@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--    <link rel="stylesheet" href="styles.css" />-->
+        <link th:href="@{/css/styles.css}" rel="stylesheet">
+        <title>Detalle de vacante</title>
+    </head>
+    <body>
+        <div class="container">
+            <nav class="shadow">
+                <div class="logo">
+                    <h1>EmpleosApp</h1>
+                    <ul>
+                        <li><a href="">Inicio</a></li>
+                        <li><a href="">Menu 1</a></li>
+                        <li><a href="">Menu 2</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn btn-primary">INGRESAR</button>
+                    <button class="btn btn-primary">REGISTRARSE</button>
+                </div>
+            </nav>
+            <div class="detalle mt-5">
+                <div class="detalle__img">
+                    <img th:src="@{/images/{img} (img=${vacante.logo}) }" alt="">
+                </div>
+                <div class="detalle__desc">
+                    <div class="card shadow">
+                        <div class="card-title">
+                            <h3>Aplicar para [[${ vacante.nombre }]]</h3>
+                        </div>
+                        <div class="card-body">
+                            <label for="">Categoría: </label> <p>[[ ${vacante.categoria} ]]</p>
+                            <label for="">Publicado: </label> <p>[[ ${vacante.fecha} ]]</p>
+                            <label for="">Salario Ofrecido: </label> <p>[[ ${vacante.salario} ]]</p><br>
+                            <p>Descripción corta de la oferta de trabajo</p>
+                            <div class="descripcion__breve">
+                                <p>[[ ${ vacante.descripcion } ]]</p>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary">Aplicar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus perferendis soluta tenetur! Debitis excepturi
+                    inventore molestias nulla quos velit voluptatem.</p>
+            </div>
+        </footer>
+    </body>
+</html>

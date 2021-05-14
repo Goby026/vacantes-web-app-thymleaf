@@ -1,0 +1,133 @@
+@charset "ISO-8859-1";
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+body{
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+}
+
+input{
+    padding: 0.5rem;
+}
+
+a, li{
+    text-decoration: none;
+    list-style: none;
+}
+
+.navbar{
+    padding: 1rem;
+}
+
+.mt-1{
+    margin-top: 5px;
+}
+
+.mt-5{
+    margin-top: 20px;
+}
+
+.mb-1{
+    margin-bottom: 5px;
+}
+
+.mb-5{
+    margin-bottom: 20px;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.shadow{
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.header{
+    align-items: center;
+	padding: 1rem;
+	display: flex;
+	justify-content: space-between;
+}
+
+.header img{
+    width: 100px;
+}
+
+.container{
+    padding: 1rem;
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 2rem;
+}
+
+.container table{
+    padding:0;
+    width:100%;
+}
+
+table tr{
+    height:35px;
+    border-bottom: 1px solid tomato;
+}
+
+/*
+.container table thead tr th{
+    background: gray;
+    color: #fff;
+    padding: 1rem;
+}
+*/
+
+.tbl-head{
+    background-color: gray;
+    color: #fff;
+}
+
+.btn{
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 7px 10px 7px 10px;
+    transition: color .3s ease;
+}
+
+.btn:focus{
+    outline: none;
+}
+
+.btn:hover{
+    color: darken($color: white, $amount: 20);
+}
+
+.btn-primary{
+    background-color: #33B5FF;
+    border-radius: 3px;
+}
+
+.btn-danger{
+    background-color: tomato;
+    border-radius: 3px;
+}
+
+.btn:disabled{
+    background-color: lighten($color: $primary, $amount: 20);
+}
+
+.btn-primary:hover{
+    background-color: darken($color: $primary, $amount: 10);
+}
+
+.btn-block{
+    width: 100%;
+}

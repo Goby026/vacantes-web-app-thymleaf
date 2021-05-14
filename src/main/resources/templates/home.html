@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link th:href="@{/css/styles.css}" rel="stylesheet">
+<!--	<link rel="stylesheet" href="../static/css/styles.css"> -->
+	<title>EmpleosApp</title>
+</head>
+<body>
+	<div class="container">
+		<nav class="shadow">
+			<div class="logo">
+				<h1>EmpleosApp</h1>
+				<ul>
+					<li><a href="">Inicio</a></li>
+					<li><a href="">Menu 1</a></li>
+					<li><a href="">Menu 2</a></li>
+				</ul>
+			</div>
+
+			<div class="nav-buttons">
+				<button class="btn btn-primary">INGRESAR</button>
+				<button class="btn btn-primary">REGISTRARSE</button>
+			</div>
+		</nav>
+		<header class="finder">
+			<h3>Encuentra el trabajo que andas buscando</h3>
+			<h5 class="mt-1">Puedes buscar por descripcion y categoria</h5>
+			<form action="#" class="mt-1">
+				<input type="text" placeholder="Escriba una busqueda">
+				<select name="" id="">
+					<option value="">Seleccione una categoria</option>
+				</select>
+				<button class="btn btn-primary">Buscar</button>
+			</form>
+		</header>
+		<div class="container__home">
+			<hr>
+				<h2 style="text-align:center;" class="mt-5 mb-5">Destacados</h2>
+			<hr>
+			<div th:each="vacante: ${vacantes}" class="vacante mt-5">
+				<div class="vacante_imagen">
+					<img th:src="@{/images/{img} (img=${vacante.logo}) }" alt="">
+				</div>
+				<div class="vacante_descripcion">
+					<h3>[[${ vacante.nombre }]]</h3>
+					<div class="vacante_descripcion__cat">
+						<label for="">Categoria:</label>
+						<p> [[${ vacante.categoria }]] </p>
+					</div>
+					<div class="vacante_descripcion__pub">
+						<label for="">Publicado:</label>
+						<p> [[${ vacante.fecha }]] </p>
+					</div>
+
+					<p class="mb-1">
+						[[${ vacante.descripcion }]]
+					</p>
+<!--					<button class="btn btn-secondary">Ver detalle >></button>-->
+					<a th:href="@{/vacantes/view/{id} ( id=${vacante.id} ) }" class="btn btn-secondary">
+						Detalle >>
+					</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<footer th:insert="fragments/pie-pagina :: pie-pagina">
+	</footer>
+
+</body>
+</html>

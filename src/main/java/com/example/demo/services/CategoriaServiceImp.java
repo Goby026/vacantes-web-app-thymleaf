@@ -1,6 +1,6 @@
 package com.example.demo.services;
 
-import com.example.demo.models.Categoria;
+import com.example.demo.model.Categoria;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;

@@ -1,7 +1,7 @@
 package com.example.demo.services;
 
-import com.example.demo.models.Categoria;
-import com.example.demo.models.Vacante;
+import com.example.demo.model.Categoria;
+import com.example.demo.model.Vacante;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -93,5 +93,14 @@ public class VacantesServicesImp implements IVacantesService{
     @Override
     public void guardar(Vacante v) {
             this.vacantes.add(v);
+    }
+
+    @Override
+    public List<Vacante> buscarDestacadas() {
+        return null;
+    }
+
+    @Override
+    public void eliminar(Integer id) {
     }
 }

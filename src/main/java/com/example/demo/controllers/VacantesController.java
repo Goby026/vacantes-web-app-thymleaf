@@ -1,7 +1,7 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.Categoria;
-import com.example.demo.models.Vacante;
+import com.example.demo.model.Categoria;
+import com.example.demo.model.Vacante;
 import com.example.demo.services.ICategoriaService;
 import com.example.demo.services.IVacantesService;
 import com.example.demo.util.Utileria;
@@ -31,7 +31,7 @@ public class VacantesController {
     private ICategoriaService cat_service;
 
     @GetMapping("/index")
-    public String mostrarIndex(Model model){
+    public String mostrarIndex(Model model) {
         List<Vacante> vacantes = this.service.listar();
         model.addAttribute("vacantes", vacantes);
         //System.out.println("LISTA DE VACANTES :");
@@ -40,23 +40,31 @@ public class VacantesController {
     }
 
     @GetMapping("/view/{id}")
-    public String verDetalle(@PathVariable("id") int idVacante, Model model){
+    public String verDetalle(@PathVariable("id") int idVacante, Model model) {
         Vacante v = service.buscarId(idVacante);
         model.addAttribute("vacante", v);
         return "vacantes/detalle";
     }
 
-    @GetMapping("/delete")
-    public String eliminar(@RequestParam("id") int idVacante, Model model){
-        System.out.println("Borrar ID:" + idVacante);
-        model.addAttribute("idVacante", idVacante);
-        return "mensaje";
+    @ModelAttribute
+    public void setGenericos(Model model){
+        model.addAttribute("categorias", this.cat_service.listar());
+    }
+
+    @GetMapping("/delete/{id}")
+    public String eliminar(@PathVariable("id") int idVacante, RedirectAttributes attr) {
+        this.service.eliminar(idVacante);
+        attr.addFlashAttribute("msg","La vacante fue eliminada");
+        return "redirect:/vacantes/index";
     }
 
     @GetMapping("/create")
-    public String crear(Vacante vacante, Model model){
-        List<Categoria> categorias = this.cat_service.listar();
-        model.addAttribute("categorias", categorias);
+    public String crear(Vacante vacante, Model model) {
+
+//   ------se agrega la lista al modelo en el metodo setGenericos------
+//        List<Categoria> categorias = this.cat_service.listar();
+//        model.addAttribute("categorias", categorias);
+
         return "vacantes/formVacante";
     }
 
@@ -76,20 +84,22 @@ public class VacantesController {
 //    }
 
     @PostMapping("/save")
-    public String guardar(@RequestParam("imagen") MultipartFile multipart, Vacante v, BindingResult result, RedirectAttributes attr){
-        if (result.hasErrors()){
+    public String guardar(@RequestParam("imagen") MultipartFile multipart, Vacante v, BindingResult result, RedirectAttributes attr) {
+//        cabe resaltar: si spring detecta que se está enviando el ID, entonces
+//        no realizará un insert sino ejecutará una setencia update
+        if (result.hasErrors()) {
 //            model.addAttribute("error", result.getFieldError());
-            for (ObjectError error: result.getAllErrors()){
-                System.out.println("Ocurrió un error: "+ error.getDefaultMessage());
+            for (ObjectError error : result.getAllErrors()) {
+                System.out.println("Ocurrió un error: " + error.getDefaultMessage());
             }
             return "vacantes/formVacante";
         }
 
-        if (!multipart.isEmpty()){
-//            String ruta = "g:/Imagenes/";
+        if (!multipart.isEmpty()) {
+//            String ruta = "h:/Imagenes/";
             String nombreImagen = Utileria.guardarArchivo(multipart, this.ruta);
 
-            if (nombreImagen != null){
+            if (nombreImagen != null) {
                 v.setLogo(nombreImagen);
             }
         }
@@ -100,6 +110,17 @@ public class VacantesController {
 //        return "vacantes/listVacantes";
 //        redirect: es como hacer una peticion get dentro de la peticion post de este controlador
         return "redirect:/vacantes/index";
+    }
+
+    @GetMapping("/editar/{id}")
+    public String editar(@PathVariable("id") int id, Model model){
+        Vacante v = this.service.buscarId(id);
+        model.addAttribute("vacante", v);
+
+//   ------se agrega la lista al modelo en el metodo setGenericos------
+//        model.addAttribute("categorias", this.cat_service.listar());
+
+        return "vacantes/formVacante";
     }
 
 }

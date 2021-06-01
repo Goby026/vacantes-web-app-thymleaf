@@ -34,6 +34,8 @@
 
                 </div>
                 <!--nombre/puesto-->
+                <input type="hidden" th:field="*{id}">
+                <input type="hidden" th:field="*{logo}">
                 <div class="col-md-3">
                     <label for="nombre" class="form-label">Nombre</label>
                     <input type="text" class="form-control" th:field="*{nombre}" name="nombre" id="nombre">
@@ -55,9 +57,9 @@
                     <label for="creada" class="form-label">Estatus</label>
                     <select th:field="*{estatus}" name="estatus" id="creada" class="form-select">
                         <option value="selected" selected>.......</option>
-                        <option value="creada">Creada</option>
-                        <option value="aprobada">Aprobada</option>
-                        <option value="eliminada">Eliminada</option>
+                        <option value="Creada">Creada</option>
+                        <option value="Aprobada">Aprobada</option>
+                        <option value="Eliminada">Eliminada</option>
                     </select>
                 </div>
                 <!--fecha-->
@@ -96,11 +98,12 @@
                 <div class="col-md-9">
                     <label for="detalles" class="form-label">Detalles</label>
                     <div class="form-floating">
-                        <textarea class="form-control" th:field="*{detalles}" name="detalles" id="detalles" style="height: 100px"></textarea>
+                        <textarea class="form-control" th:field="*{detalles}" name="detalles" id="detalles" style="height: 380px"></textarea>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <label class="form-label">Imagen / logo</label>
+                    <img class="img img-fluid" th:src="@{/logos/{img} (img=${vacante.logo})}" alt="">
                 </div>
 
                 <div class="col-12">

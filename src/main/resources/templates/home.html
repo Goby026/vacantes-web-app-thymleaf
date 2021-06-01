@@ -1,75 +1,116 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link th:href="@{/css/styles.css}" rel="stylesheet">
-<!--	<link rel="stylesheet" href="../static/css/styles.css"> -->
-	<title>EmpleosApp</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <title>EmpleosApp</title>
 </head>
 <body>
-	<div class="container">
-		<nav class="shadow">
-			<div class="logo">
-				<h1>EmpleosApp</h1>
-				<ul>
-					<li><a href="">Inicio</a></li>
-					<li><a href="">Menu 1</a></li>
-					<li><a href="">Menu 2</a></li>
-				</ul>
-			</div>
 
-			<div class="nav-buttons">
-				<button class="btn btn-primary">INGRESAR</button>
-				<button class="btn btn-primary">REGISTRARSE</button>
-			</div>
-		</nav>
-		<header class="finder">
-			<h3>Encuentra el trabajo que andas buscando</h3>
-			<h5 class="mt-1">Puedes buscar por descripcion y categoria</h5>
-			<form action="#" class="mt-1">
-				<input type="text" placeholder="Escriba una busqueda">
-				<select name="" id="">
-					<option value="">Seleccione una categoria</option>
-				</select>
-				<button class="btn btn-primary">Buscar</button>
-			</form>
-		</header>
-		<div class="container__home">
-			<hr>
-				<h2 style="text-align:center;" class="mt-5 mb-5">Destacados</h2>
-			<hr>
-			<div th:each="vacante: ${vacantes}" class="vacante mt-5">
-				<div class="vacante_imagen">
-					<img th:src="@{/images/{img} (img=${vacante.logo}) }" alt="">
-				</div>
-				<div class="vacante_descripcion">
-					<h3>[[${ vacante.nombre }]]</h3>
-					<div class="vacante_descripcion__cat">
-						<label for="">Categoria:</label>
-						<p> [[${ vacante.categoria }]] </p>
-					</div>
-					<div class="vacante_descripcion__pub">
-						<label for="">Publicado:</label>
-						<p> [[${ vacante.fecha }]] </p>
-					</div>
+<div class="container-fluid m-0 p-0" th:insert="fragments/menu :: menu-principal">
+</div>
 
-					<p class="mb-1">
-						[[${ vacante.descripcion }]]
-					</p>
-<!--					<button class="btn btn-secondary">Ver detalle >></button>-->
-					<a th:href="@{/vacantes/view/{id} ( id=${vacante.id} ) }" class="btn btn-secondary">
-						Detalle >>
-					</a>
+<div class="container-fluid m-0 p-0 shadow mb-5 bg-body rounded">
+    <div class="row m-0 p-0 bg-secondary d-flex align-items-center" style="height: 200px !important;">
+		<col-md-12>
+			<h1 class="text-center text-white">
+				PORTAL DE EMPLEOS
+			</h1>
+		</col-md-12>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="row">
+		<div class="col-md-12">
+			<div class="card w-100 shadow mb-5 bg-body rounded">
+				<div class="card-body">
+					<h5 class="card-title text-center">Encuentra el trabajo que andas buscando</h5>
+					<form th:action="@{/vacantes/buscarDestacados}" class="row">
+						<div class="col-md-5">
+							<input type="text" class="form-control" placeholder="Escriba una busqueda">
+						</div>
+						<div class="col-md-5">
+							<select name="" class="form-select">
+								<option value="0">Seleccione una categoria</option>
+								<option th:each="categoria: ${categorias}" value="${categoria.id}">[[ ${categoria.nombre} ]]</option>
+							</select>
+						</div>
+						<div class="col-md-2 d-grid">
+							<button class="btn btn-outline-primary">Buscar</button>
+						</div>
+					</form>
 				</div>
 			</div>
-
 		</div>
-	</div>
 
-	<footer th:insert="fragments/pie-pagina :: pie-pagina">
-	</footer>
+    </div>
 
+    <div class="row">
+		<div class="col-md-12">
+			<h2 style="text-align:center;" class="mt-5 mb-5">Destacados</h2>
+		</div>
+		<div class="col-md-12">
+			<div th:each="vacante: ${vacantes}" class="card mb-3 shadow mb-5 bg-body rounded">
+				<div class="row g-0">
+					<div class="col-md-4 d-flex justify-content-center align-items-center"
+						 style="max-height=310px !important">
+						<img class="img-fluid" th:src="@{/logos/{img} (img=${vacante.logo}) }" alt="">
+					</div>
+					<div class="col-md-8">
+						<div class="card-body">
+							<h5 class="card-title">[[${ vacante.nombre }]]</h5>
+							<p class="card-text">
+							<p>Categoria: [[${ vacante.categoria.nombre }]] </p>
+							</p>
+
+							<p class="mb-1">
+								[[${ vacante.descripcion }]]
+							</p>
+
+							<p class="card-text mt-5">
+								<small class="text-muted">
+									Publicado: [[${ vacante.fecha }]]
+								</small>
+
+							</p>
+
+						</div>
+
+						<div class="card-footer">
+							<a th:href="@{/vacantes/view/{id} ( id=${vacante.id} ) }" class="btn btn-warning">
+								Detalle >>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+
+</div>
+
+<footer class="footer">
+    <div class="container" th:insert="fragments/pie-pagina :: pie-pagina">
+    </div>
+</footer>
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+-->
 </body>
 </html>

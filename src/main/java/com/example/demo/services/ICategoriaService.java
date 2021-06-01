@@ -1,7 +1,7 @@
 package com.example.demo.services;
 
 
-import com.example.demo.models.Categoria;
+import com.example.demo.model.Categoria;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.Categoria;
-import com.example.demo.services.CategoriaServiceImp;
+import com.example.demo.model.Categoria;
+import com.example.demo.services.ICategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,10 +10,8 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -21,7 +19,7 @@ import java.util.List;
 public class CategoriasController {
 
     @Autowired
-    private CategoriaServiceImp service;
+    private ICategoriaService service;
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String mostrarIndex(Model model){

@@ -1,10 +1,11 @@
 package com.example.demo.controllers;
 
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.example.demo.models.Vacante;
+import com.example.demo.model.Categoria;
+import com.example.demo.model.Vacante;
+import com.example.demo.services.ICategoriaService;
 import com.example.demo.services.IVacantesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,9 @@ public class HomeController {
 
 	@Autowired
 	private IVacantesService serviceVacantes;
+
+	@Autowired
+	private ICategoriaService serviceCategorias;
 
 	@GetMapping("/tabla")
 	public String mostrarTabla(Model model){
@@ -57,9 +61,12 @@ public class HomeController {
 	@GetMapping("/")
 	public String getHome(Model model) {
 
-		List<Vacante> lista = serviceVacantes.listar();
+		List<Vacante> lista = this.serviceVacantes.buscarDestacadas();
+
+		List<Categoria> categorias = this.serviceCategorias.listar();
 
 		model.addAttribute("vacantes", lista);
+		model.addAttribute("categorias", categorias);
 		
 		return "home";
 	}
